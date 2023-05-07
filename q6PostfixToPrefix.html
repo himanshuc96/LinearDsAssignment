@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      h2 {
+        text-align: center;
+        text-transform: capitalize;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Q6. Convert Postfix expression to Prefix expression.</h2>
+    <script>
+      function postfixToPrefix() {
+        let postfix = prompt("Enter the postfix expression:");
+        console.log("Postfix : " + postfix);
+        let stack = [];
+        for (let i = 0; i < postfix.length; i++) {
+          let char = postfix[i];
+          if (isOperand(char)) {
+            stack.push(char);
+          } else if (isOperator(char)) {
+            let operand2 = stack.pop();
+            let operand1 = stack.pop();
+            let prefixExpr = `${char}${operand1}${operand2}`;
+            stack.push(prefixExpr);
+          }
+        }
+        if (stack.length === 1) {
+          return stack[0];
+        } else {
+          throw new Error("Invalid postfix expression");
+        }
+      }
+
+      function isOperand(char) {
+        // Check if the character is a number or variable
+        return /^[a-zA-Z0-9]+$/.test(char);
+      }
+
+      function isOperator(char) {
+        // Check if the character is an operator
+        return /^[\+\-\*\/\^]$/.test(char);
+      }
+      let prefixExpr = postfixToPrefix();
+      console.log("Prefix : " + prefixExpr);
+    </script>
+  </body>
+</html>

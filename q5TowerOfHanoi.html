@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      h2 {
+        text-align: center;
+        text-transform: capitalize;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>
+      Q5. Read about the Tower of Hanoi algorithm. Write a program to implement
+      it.
+    </h2>
+    <script>
+      let n = parseInt(prompt("Enter the number of disks:"));
+      if (!Number.isInteger(n) || n < 1) {
+        console.error("Invalid number of disks");
+      } else {
+        let fromRod = prompt("Enter the name of the starting rod:");
+        let toRod = prompt("Enter the name of the destination rod:");
+        let auxRod = prompt("Enter the name of the auxiliary rod:");
+        try {
+          towerOfHanoi(n, fromRod, toRod, auxRod);
+        } catch (error) {
+          console.error(error.message);
+        }
+      }
+
+      function towerOfHanoi(n, fromRod, toRod, auxRod) {
+        if (n === 1) {
+          console.log(`Move disk 1 from ${fromRod} to ${toRod}`);
+          return;
+        }
+        towerOfHanoi(n - 1, fromRod, auxRod, toRod);
+        console.log(`Move disk ${n} from ${fromRod} to ${toRod}`);
+        towerOfHanoi(n - 1, auxRod, toRod, fromRod);
+      }
+    </script>
+  </body>
+</html>

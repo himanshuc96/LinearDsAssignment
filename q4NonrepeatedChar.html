@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      h2 {
+        text-align: center;
+        text-transform: capitalize;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>
+      Q4. Write a program to print the first non-repeated character from a
+      string?
+    </h2>
+    <script>
+      function firstNonRepeatedChar(s) {
+        const charCount = {};
+
+        // count the frequency of each character in the string
+        for (let i = 0; i < s.length; i++) {
+          const char = s[i];
+          if (char in charCount) {
+            charCount[char] += 1;
+          } else {
+            charCount[char] = 1;
+          }
+        }
+
+        // find the first character that has a count of 1
+        for (let i = 0; i < s.length; i++) {
+          const char = s[i];
+          if (charCount[char] === 1) {
+            return char;
+          }
+        }
+
+        // if no character has a count of 1, return null
+        return null;
+      }
+
+      const s = prompt("Enter a string ");
+      console.log(firstNonRepeatedChar(s)); // prints 'e'
+    </script>
+  </body>
+</html>

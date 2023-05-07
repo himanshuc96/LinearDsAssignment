@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Find Smallest Number Using Stack</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: white;
+        background-color: black;
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+      }
+      h1 {
+        text-align: center;
+      }
+
+      p {
+        font-weight: bold;
+      }
+
+      input[type="number"] {
+        width: 100px;
+        padding: 10px;
+        margin: 5px;
+      }
+
+      button {
+        padding: 10px;
+        margin: 5px;
+        cursor: pointer;
+        color: #ccc;
+        background-color: black;
+        border: 2px solid #ccc;
+        border-radius: 2px;
+      }
+
+      #result {
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Find Smallest Number Using Stack</h1>
+
+    <p>Enter Numbers each element on new line</p>
+    <textarea id="numbers" rows="25" cols="25"></textarea>
+
+    <button onclick="findSmallestNumber()">Find Smallest Number</button>
+    <div id="result"></div>
+
+    <script>
+      function Stack() {
+        this.items = [];
+      }
+
+      Stack.prototype.push = function (item) {
+        this.items.push(item);
+      };
+
+      Stack.prototype.pop = function () {
+        return this.items.pop();
+      };
+
+      Stack.prototype.peek = function () {
+        return this.items[this.items.length - 1];
+      };
+
+      Stack.prototype.isEmpty = function () {
+        return this.items.length === 0;
+      };
+
+      function findSmallestNumber() {
+        const numbersInput = document.getElementById("numbers").value;
+        const numbersArray = numbersInput.split("\n").map(Number);
+
+        const stack = new Stack();
+        numbersArray.forEach((number) => stack.push(number));
+
+        let smallestNumber = stack.pop();
+        while (!stack.isEmpty()) {
+          const currentNumber = stack.pop();
+          if (currentNumber < smallestNumber) {
+            smallestNumber = currentNumber;
+          }
+        }
+
+        const resultDiv = document.getElementById("result");
+        resultDiv.textContent = `The smallest number is ${smallestNumber}.`;
+      }
+    </script>
+  </body>
+</html>

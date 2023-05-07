@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bracket Checker</title>
+  </head>
+  <style>
+    * {
+      font-family: "Courier New", Courier, monospace;
+      color: white;
+      background-color: black;
+      text-transform: uppercase;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border: 1px solid #ccc;
+      margin: 100px;
+    }
+    input {
+      width: 700px;
+      height: 40px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 150px;
+      height: 40px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+  </style>
+  <body>
+    <h1>Bracket Checker</h1>
+    <p>Enter a code snippet to check if all the brackets are closed:</p>
+    <input type="text" id="codeSnippet" />
+    <br />
+    <button onclick="checkBrackets()">Check Brackets</button>
+    <p id="result"></p>
+    <script>
+      function checkBrackets() {
+        let code = document.getElementById("codeSnippet").value;
+        let stack = [];
+        for (let i = 0; i < code.length; i++) {
+          let char = code[i];
+          if (char === "(" || char === "[" || char === "{") {
+            stack.push(char);
+          } else if (char === ")" || char === "]" || char === "}") {
+            let top = stack.pop();
+            if (
+              (char === ")" && top !== "(") ||
+              (char === "]" && top !== "[") ||
+              (char === "}" && top !== "{")
+            ) {
+              document.getElementById("result").innerHTML =
+                "Brackets are not closed";
+
+              var element = document.getElementById("result");
+              element.style.color = "red";
+              return;
+            }
+          }
+        }
+        if (stack.length === 0) {
+          document.getElementById("result").innerHTML =
+            "All brackets are closed";
+          var element = document.getElementById("result");
+          element.style.color = "green";
+        } else {
+          document.getElementById("result").innerHTML =
+            "Brackets are not closed";
+
+          var element = document.getElementById("result");
+          element.style.color = "red";
+        }
+      }
+    </script>
+  </body>
+</html>
